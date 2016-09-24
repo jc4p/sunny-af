@@ -79,7 +79,7 @@ def get_possible_trips(from_code, to_code, depart_date, arrival_date, nonstop):
     depart_date_str = str(depart_date + relativedelta.relativedelta(days=depart_delta))
     for arrival_delta in [-1, 0, 1]:
       arrival_date_str = str(arrival_date + relativedelta.relativedelta(days=arrival_delta))
-      results[depart_date_str][arrival_date_str] = get_trips("DEN", destination['code'],
+      results[depart_date_str][arrival_date_str] = get_trips(from_code, to_code,
           depart_date_str, arrival_date_str, nonstop)
   return dict(results)
 
@@ -99,12 +99,13 @@ if __name__ == "__main__":
       depart_date_str = str(depart_date + relativedelta.relativedelta(days=depart_delta))
       for arrival_delta in [-1, 0, 1]:
         arrival_date_str = str(arrival_date + relativedelta.relativedelta(days=arrival_delta))
-        for trip in trips[depart_date_str][arrival_date_str]:
-          print "{} -> {}".format(depart_date_str, arrival_date_str)
-          line = trip['saleTotal'] + " \t"
-          for s in trip['slice']:
-              line += "{} {} {} to {} ".format(s['segment'][0]['flight']['carrier'],
-                  s['segment'][0]['flight']['number'], s['segment'][0]['leg'][0]['origin'],
-                  s['segment'][0]['leg'][0]['destination'])
-          print line
-        print ""
+        if trips[depart_date_str][arrival_date_str]:
+          for trip in trips[depart_date_str][arrival_date_str]:
+            print "{} -> {}".format(depart_date_str, arrival_date_str)
+            line = trip['saleTotal'] + " \t"
+            for s in trip['slice']:
+                line += "{} {} {} to {} ".format(s['segment'][0]['flight']['carrier'],
+                    s['segment'][0]['flight']['number'], s['segment'][0]['leg'][0]['origin'],
+                    s['segment'][0]['leg'][0]['destination'])
+            print line
+          print ""
