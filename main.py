@@ -84,6 +84,7 @@ def get_possible_trips(from_code, to_code, depart_date, arrival_date, nonstop):
   return dict(results)
 
 
+# TODO: Use a redis based local flight cache, based on the code for https://github.com/jc4p/lol-data-analysis
 if __name__ == "__main__":
     destination = random.choice(DESTINATIONS)
     today = datetime.date.today()
