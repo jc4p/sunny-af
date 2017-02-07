@@ -11,7 +11,6 @@ DESTINATIONS = [
   {"name": "Folly Beach, SC", "code": "CHS"},
   {"name": "San Diego, CA", "code": "SAN"},
   {"name": "Maui, HI", "code": "OGG"},
-  {"name": "Provincetown, MA", "code": "PVC"},
   {"name": "Carmel-by-the-Sea, CA", "code": "MRY"},
   {"name": "Palm Springs, CA", "code": "PSP"}
 ]
