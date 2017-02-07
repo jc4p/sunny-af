@@ -13,49 +13,6 @@ from multiprocessing import Pool, Process
 import datetime
 import dateutil.relativedelta as relativedelta
 
-DESTINATIONS = [
-    {"name": "Pensacola", "code": "PNS"},
-    {"name": "Myrtle Beach", "code": "MYR"},
-    {"name": "Tybee Island", "code": "SAV"},
-    {"name": "Virginia Beach", "code": "ORF"},
-    {"name": "Carolina Beach", "code": "OAJ"},
-    {"name": "Laguna Beach", "code": "SNA"},
-    {"name": "Puerto Rico", "code": "SJU"},
-    {"name": "Boca Raton", "code": "FLL"},
-    {"name": "Folly Beach", "code": "CHS"}
-]
-
-def make_search_payload(from_code, to_code, date_start, date_end, nonstop=False):
-    return {
-      "request": {
-        "passengers": {
-          "kind": "qpxexpress#passengerCounts",
-          "adultCount": 1,
-          "childCount": 0,
-          "infantInLapCount": 0,
-          "infantInSeatCount": 0,
-          "seniorCount": 0
-        },
-        "slice": [
-          {
-            "kind": "qpxexpress#sliceInput",
-            "origin": from_code,
-            "destination": to_code,
-            "date": date_start,
-            "maxStops": 0 if nonstop else 3
-          },
-          {
-            "kind": "qpxexpress#sliceInput",
-            "origin": to_code,
-            "destination": from_code,
-            "date": date_end,
-            "maxStops": 0 if nonstop else 3
-          }
-        ],
-        "solutions": 3
-      }
-    }
-
 
 def get_trips(from_code, to_code, date_start, date_end, nonstop):
     page = requests.post("https://www.googleapis.com/qpxExpress/v1/trips/search",
@@ -88,7 +45,7 @@ def get_possible_trips(from_code, to_code, depart_date, arrival_date, nonstop):
 # TODO: Use a redis based local flight cache, based on the code for https://github.com/jc4p/lol-data-analysis
 if __name__ == "__main__":
     destination = random.choice(DESTINATIONS)
-    today = datetime.date.today()
+    today = datetime.utcnow().date()
     # Let's look for flights -1/+1 days from next-next Friday
     depart_date = today + relativedelta.relativedelta(days=7, weekday=relativedelta.FR)
     # And arriving -1/+1 days from the next Monday

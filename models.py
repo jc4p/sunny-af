@@ -92,6 +92,22 @@ class TripOptionSegmentLeg:
   def __repr__(self):
     return "<Leg {} to {}>".format(self.origin, self.destination)
 
+class WeatherReport:
+  def __init__(self, d, date, city, airport_code):
+    self.precipType = d['precipType'] if 'precipType' in d else ''
+    self.precipProbability = d['precipProbability'] if 'precipProbability' in d else 0.0
+    self.summary = d['summary']
+    self.temperatureMin = d['temperatureMin']
+    self.temperatureMax = d['temperatureMax']
+    self.date = date
+    self.city = city
+    self.airport_code = airport_code
 
+  def __repr__(self):
+    return "<Weather {} {:%y-%m-%d} {}/{}>".format(self.city, self.date, self.temperatureMin, self.temperatureMax)
+  
+  def __eq__(self, other):
+    return self.date == other.date and self.airport_code == other.airport_code
 
-
+  def __hash__(self):
+    return hash("{}_{}".format(self.airport_code, self.date.timestamp()))
