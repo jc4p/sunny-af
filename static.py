@@ -7,13 +7,13 @@ DESTINATIONS = [
   {"name": "Laguna Beach, CA", "code": "SNA"},
   {"name": "San Juan, PR", "code": "SJU"},
   {"name": "Boca Raton, FL", "code": "FLL"},
+  {"name": "Orlando, FL", "code": "MCO"},
   {"name": "Folly Beach, SC", "code": "CHS"},
-  {"name": "Long Beach, WA", "code": "PDX"},
-  {"name": "Clearwater, WA", "code": "TPA"},
   {"name": "San Diego, CA", "code": "SAN"},
   {"name": "Maui, HI", "code": "OGG"},
   {"name": "Provincetown, MA", "code": "PVC"},
-  {"name": "Carmel-by-the-Sea, CA", "code": "MRY"}
+  {"name": "Carmel-by-the-Sea, CA", "code": "MRY"},
+  {"name": "Palm Springs, CA", "code": "PSP"}
 ]
 
 ORIGINS = [
