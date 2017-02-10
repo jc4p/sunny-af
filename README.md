@@ -9,4 +9,4 @@ The current code looks ahead to next-next Friday then uses Google's [QPX Express
 
 It spits out stuff like this:
 
-![screenshot](http://i.imgur.com/Cu5PLJx.png)
+![screenshot](http://i.imgur.com/Bfu1amS.jpg)
